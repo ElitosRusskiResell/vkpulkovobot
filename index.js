@@ -4,13 +4,16 @@ const config = require("./config.json"), // конфиг файл
     { HearManager } = require('@vk-io/hear'),
     { API } = require('vk-io'),
     { Keyboard }= require('vk-io');
+    require('dotenv').config();
+    console.log(process.env.TOKEN);
+
 const api = new API({
-	token: config.token
-});
+	token: process.env.TOKEN
+})
 //Удобен для создания команд бота
 // Теперь необходимо создать экземпляр класса передав в него наш токен для работы с API, в дальнейшем этот экземпляр понадобится нам для работы с библиотекой
 const vk = new VK({
-    token: config.token
+    token: process.env.TOKEN
 });
 const hearManager = new HearManager();
 
@@ -62,7 +65,7 @@ hearCommand('restart', (context, next) => {
 	context.state.command = 'help';
 console.log("started")
 	return Promise.all([
-		
+
 
 		next()
 	]);
@@ -76,7 +79,7 @@ hearCommand('help', async (context) => {
 		`,
 		keyboard: Keyboard.builder()
         .oneTime()
-        
+
         .row()
 			.textButton({
 				label: 'Информация о рейсе ✈',
@@ -129,13 +132,13 @@ hearCommand('help', async (context) => {
 				},
 				color: Keyboard.PRIMARY_COLOR
 			})
-			
+
 	});
 });
 hearCommand('flyinfo', async (context) => {
 	await context.send({message: `Информация о рейсе`,
 		keyboard: Keyboard.builder()
-			
+
         .inline()
             .urlButton({
                 label: 'Табло рейсов',
@@ -158,13 +161,13 @@ hearCommand('flyinfo', async (context) => {
                     command: 'help'
                 }
             })
-			
+
 	});
 });
 hearCommand('parking', async (context) => {
 	await context.send({message: `Транспорт и парковки`,
 		keyboard: Keyboard.builder()
-			
+
         .inline()
             .urlButton({
                 label: 'Информация о паркинге',
@@ -187,14 +190,14 @@ hearCommand('parking', async (context) => {
                     command: 'help'
                 }
             })
-			
+
 	});
 });
 
 hearCommand('bags', async (context) => {
 	await context.send({message: `Багаж, досмотр и контроль`,
 		keyboard: Keyboard.builder()
-			
+
         .inline()
             .urlButton({
                 label: 'Общая информация о багаже',
@@ -217,14 +220,14 @@ hearCommand('bags', async (context) => {
                     command: 'help'
                 }
             })
-			
+
 	});
 });
 
 hearCommand('more', async (context) => {
 	await context.send({message: `Больше о нас`,
 		keyboard: Keyboard.builder()
-			
+
         .inline()
             .urlButton({
                 label: 'Telegram',
@@ -252,7 +255,7 @@ hearCommand('more', async (context) => {
                     command: 'help'
                 }
             })
-			
+
 	});
 });
 // Запускаем нашего бота и в случае ошибки выводим в консоль с помощью catch
