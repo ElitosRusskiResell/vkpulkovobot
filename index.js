@@ -1,5 +1,5 @@
 
-const config = require("./config.json"), // конфиг файл
+
     { VK } = require('vk-io'), // библиотека
     { HearManager } = require('@vk-io/hear'),
     { API } = require('vk-io'),
