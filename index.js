@@ -1,6 +1,6 @@
-// Добавляем конфиг файл для хранения токена и подключаем библиотеку, которая облегчит работу с API ВК
+
 const config = require("./config.json"), // конфиг файл
-    { VK } = require('vk-io'), // сама библиотека
+    { VK } = require('vk-io'), // библиотека
     { HearManager } = require('@vk-io/hear'),
     { API } = require('vk-io'),
     { Keyboard }= require('vk-io');
@@ -10,8 +10,7 @@ const config = require("./config.json"), // конфиг файл
 const api = new API({
 	token: process.env.TOKEN
 })
-//Удобен для создания команд бота
-// Теперь необходимо создать экземпляр класса передав в него наш токен для работы с API, в дальнейшем этот экземпляр понадобится нам для работы с библиотекой
+
 const vk = new VK({
     token: process.env.TOKEN
 });
@@ -29,7 +28,7 @@ vk.updates.on('message_new', (context, next) => {
 
 vk.updates.on('message_new', hearManager.middleware);
 
-// Simple wrapper for commands
+// wrapper for commands
 const hearCommand = (name, conditions, handle) => {
 	if (typeof handle !== 'function') {
 		handle = conditions;
@@ -258,7 +257,7 @@ hearCommand('more', async (context) => {
 
 	});
 });
-// Запускаем нашего бота и в случае ошибки выводим в консоль с помощью catch
+
 vk.updates.start()
     .then(() => console.log('Бот запущен!'))
     .catch(console.error);
