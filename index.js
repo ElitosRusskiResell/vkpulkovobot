@@ -1,15 +1,11 @@
 
+const { VK } = require('vk-io');
+const { HearManager } = require('@vk-io/hear');
+const { API } = require('vk-io');
+const { Keyboard } = require('vk-io');
+require('dotenv').config();
 
-    { VK } = require('vk-io'), // библиотека
-    { HearManager } = require('@vk-io/hear'),
-    { API } = require('vk-io'),
-    { Keyboard }= require('vk-io');
-    require('dotenv').config();
-    console.log(process.env.TOKEN);
 
-const api = new API({
-	token: process.env.TOKEN
-})
 
 const vk = new VK({
     token: process.env.TOKEN
@@ -114,11 +110,8 @@ hearCommand('help', async (context) => {
                 url: 'https://pulkovoairport.ru/passengers/pulkovo_children/'
             })
             .row()
-            .urlButton({
-                label: 'FAQ❓',
-                url: 'https://pulkovoairport.ru/passengers/faq/'
-            })
-            .row()
+           
+            
             .urlButton({
                 label: 'Важная информация❗',
                 url: 'https://pulkovoairport.ru/important/'
@@ -126,11 +119,17 @@ hearCommand('help', async (context) => {
             .row()
             .textButton({
 				label: 'Больше о нас 👥',
+                
 				payload: {
 					command: 'more'
-				},
-				color: Keyboard.PRIMARY_COLOR
+				}
+				
 			})
+            .urlButton({
+                label: 'FAQ❓',
+                url: 'https://pulkovoairport.ru/passengers/faq/',
+                
+            })
 
 	});
 });
@@ -257,7 +256,6 @@ hearCommand('more', async (context) => {
 
 	});
 });
-
 vk.updates.start()
     .then(() => console.log('Бот запущен!'))
     .catch(console.error);
