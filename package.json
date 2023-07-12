@@ -1,6 +1,10 @@
 {
   "dependencies": {
     "@vk-io/hear": "^1.1.1",
+    "dotenv": "^16.3.1",
     "vk-io": "^4.8.3"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
 }
